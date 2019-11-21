@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="0"
+            failures="2"
+            tests="3">
+
+  <testsuite name="projets"
+    errors="0" failures="2" hostname="" id="" package="projets" skipped="0"
+    tests="3" time="6.941" timestamp="Sun, 13 Oct 2019 19:39:27 GMT">
+  
+    <testcase name="Page de projets" classname="projets" time="3.856" assertions="4">
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Page du projet de Mailloux" classname="projets" time="2.923" assertions="3">
+
+    
+
+      <failure message="Le menu de la page de projets est sélectionné.">    at Object.Page du projet de Mailloux (/home/kolam/svn/log4420-A2019/TravauxPratiques/TP3/Corrige/tests/e2e/projets.js:28:15)
+    at process._tickCallback (internal/process/next_tick.js:61:11)</failure>
+
+    
+    </testcase>
+  
+    <testcase name="Page du projet de Bourgoin" classname="projets" time="0.1620" assertions="3">
+
+    
+
+      <failure message="Le menu de la page de projets est sélectionné.">    at Object.Page du projet de Bourgoin (/home/kolam/svn/log4420-A2019/TravauxPratiques/TP3/Corrige/tests/e2e/projets.js:40:15)
+    at process._tickCallback (internal/process/next_tick.js:61:11)</failure>
+
+    
+    </testcase>
+  
+
+  
+
+  
+  </testsuite>
+</testsuites>

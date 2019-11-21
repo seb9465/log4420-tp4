@@ -1,0 +1,71 @@
+@import "/font-awesome/css/font-awesome.css";
+
+html {
+  height: 100%;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  min-height: 100%;
+  margin: 0;
+  padding-bottom: 10rem;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: #373a3c;
+}
+
+.container {
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+main {
+  position: relative;
+}
+
+a {
+  color: #373a3c;
+  text-decoration: none;
+  outline: none;
+}
+
+a[href]:not([href=""]) {
+  color: #428bca;
+}
+
+a[href]:not([href=""]):hover:not(.active) {
+  color: #373a3c;
+}
+
+h2 {
+  margin-top: 50px;
+}
+
+.date::first-letter, .news .date::first-letter {
+  text-transform: capitalize;
+}
+
+p {
+  text-align: justify;
+}
+
+.loading-container {
+  position: relative;
+  min-height: 200px;
+}
+
+.sweet-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  background-color: white;
+  transform: translate(-50%, -50%);
+}
+

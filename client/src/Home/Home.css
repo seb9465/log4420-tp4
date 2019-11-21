@@ -1,0 +1,38 @@
+.jumbotron {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding: 18px 2rem 10px;
+  background-color: #eceeef;
+  border-radius: .3rem;
+}
+
+.news {
+  list-style-type: none;
+  padding: 0;
+}
+
+.news li {
+  display: flex;
+  padding-bottom: 1.5rem;
+}
+
+.news .post-date {
+  color: #888;
+  font-weight: bold;
+  font-size: .8em;
+}
+
+.icon {
+  color: #bbb;
+  font-size: 2em;
+  width: 4rem;
+  padding: 0 1rem;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.icon img {
+  width: 30px;
+  padding-top: 10px;
+  opacity: 0.3;
+}

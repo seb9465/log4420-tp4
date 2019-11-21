@@ -1,0 +1,23 @@
+{
+  "name": "log4420-labo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "cd ./client && npm install && cd .. && cd ./server && npm install",
+    "start": "concurrently \"cd ./client && npm start\" \"cd ./server && npm start\"",
+    "e2e": "cd ./server && npm run setup && cd .. && nightwatch --config ./tests/nightwatch.conf.js --env firefox tests/e2e/all.js",
+    "clean": "cd ./client && rm -rf node_modules && cd .. && cd ./server && rm -rf node_modules && cd .. && rm -rf node_modules"
+  },
+  "devDependencies": {
+    "concurrently": "^3.5.0",
+    "nyc": "^13.3.0",
+    "selenium-server": "^3.141.59",
+    "chromedriver": "^77.0.0",
+    "geckodriver": "^1.18.0",
+    "nightwatch": "^1.2.4",
+    "nightwatch-custom-commands-assertions": "^1.1.0"
+  },
+  "author": "",
+  "license": "ISC"
+}
