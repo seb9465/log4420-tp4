@@ -6,6 +6,7 @@
   "scripts": {
     "postinstall": "cd ./client && npm install && cd .. && cd ./server && npm install",
     "start": "concurrently \"cd ./client && npm start\" \"cd ./server && npm start\"",
+    "start-windows": "concurrently \"cd ./client && npm run start-windows\" \"cd ./server && npm run start\"",
     "e2e": "cd ./server && npm run setup && cd .. && nightwatch --config ./tests/nightwatch.conf.js --env firefox tests/e2e/all.js",
     "clean": "cd ./client && rm -rf node_modules && cd .. && cd ./server && rm -rf node_modules && cd .. && rm -rf node_modules"
   },
