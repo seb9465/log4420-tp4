@@ -18,6 +18,8 @@ const express = require('express')
 const router = express.Router()
 
 module.exports = (req, res, next) => {
+  console.log(`[APP] ${req.method} ${req.url}`);
+
   const factory = require('../../services/mongo/factory')(req.app.db)
   // const factory = require('../../services/yaml/factory')(require('fs'))
 
