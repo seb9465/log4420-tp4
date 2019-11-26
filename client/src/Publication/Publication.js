@@ -12,22 +12,22 @@ const fetch = window.fetch
 export default props => {
 
   // À COMPLÉTER
-  // - Récupérez des publications du service web http://localhost:3000/api/publications en utilisant les 'query parameters' de l'URL (avec props.location.search)
-  // - Une fois que les données ont été récupérées, le loading devient false
+  // - (DONE) Récupérez des publications du service web http://localhost:3000/api/publications en utilisant les 'query parameters' de l'URL (avec props.location.search)
+  // - (DONE) Une fois que les données ont été récupérées, le loading devient false
   // - Migrez la table de publication dans la composante PublicationTable.
-  // - Faite correctement la gestion d'événement lorsqu'on change le type de trie, l'ordre de trie, le nombre d'élémentspar page et la page en cours.
+  // - Faite correctement la gestion d'événement lorsqu'on change le type de trie, l'ordre de trie, le nombre d'éléments par page et la page en cours.
   // - Si on clique sur "Ajouter une publication", affichez la composante 'PublicationCreationModal'
   // - Si on clique sur le bouton X de la modal, elle doit se fermer.
   // - Supprimez une publication si on clique sur le bouton de suppression et rechargez la page.
   // - Gestion du formulaire de création d'une publication.
   //   Si le formulaire a été correctement rempli, affichez la nouvelle publication dans la table.
   //   Si le serveur renvoie une erreur, alors affichez les erreurs.
-  const publications = {
+  const [publications, setPublications] = useState({
     count: 0,
     publications: []
-  }
+  })
 
-  const showModal = true
+  const showModal = false
 
   const pagingOptions = {
     'limit': 10,
@@ -36,7 +36,26 @@ export default props => {
     'orderBy': 'desc'
   }
 
-  const loading = false
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchPublications = async () => {
+      const options = {
+        headers: { 'accept-language': 'fr' }
+      }
+
+      const response = await fetch(`http://localhost:3000/api/publications?${props.location.search}`, options)
+
+      const publications = await response.json()
+
+      return publications
+    }
+
+    fetchPublications().then(publications => {
+      setPublications(publications)
+      setLoading(false)
+    })
+  }, [props.location.search])
 
   const errors = []
 
@@ -106,7 +125,7 @@ export default props => {
 
         button.trigger Ajouter une publication
 
-        PublicationCreationModal()
+        // PublicationCreationModal()
 
         p
           | Trié par: #{''}
