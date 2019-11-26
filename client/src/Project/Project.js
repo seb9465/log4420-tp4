@@ -11,8 +11,8 @@ export default props => {
 
   // À COMPLÉTER
   // Cette composante correspond à la route '/projects/:id'. L'identifiant id est disponible dans 'props.match.params.id'
-  // 1- Récupérer le project du service web http://localhost:3000/api/projects/:id avec 'fetch' et avec l'entête 'accept-language' à 'fr'.
-  // 2- Une fois que les données ont été récupérées, le loading devient false
+  // 1- (DONE) Récupérer le project du service web http://localhost:3000/api/projects/:id avec 'fetch' et avec l'entête 'accept-language' à 'fr'.
+  // 2- (DONE) Une fois que les données ont été récupérées, le loading devient false
   // 3- Réutilisez la composante PublicationTable
   // 4- Si on supprime une publication, la liste doit être mise à jour.
 
@@ -30,8 +30,6 @@ export default props => {
       const response = await fetch(`http://localhost:3000/api/projects/${props.match.params.id}`, options)
       
       const projectObj = await response.json()
-
-      console.log(projectObj.publications)
 
       return projectObj
     }
