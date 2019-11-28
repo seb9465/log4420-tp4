@@ -29,12 +29,12 @@ export default props => {
 
   const showModal = false
 
-  const pagingOptions = {
+  const [pagingOptions, setPagingOptions] = useState({
     'limit': 10,
     'pageNumber': 1,
     'sortBy': 'date',
     'orderBy': 'desc'
-  }
+  })
 
   const [loading, setLoading] = useState(true)
 
@@ -75,7 +75,7 @@ export default props => {
       search: '?' + search_params.toString()
     })
     const newPagingOptions = { ...pagingOptions, 'sortBy': e.target.value }
-    pagingOptions = newPagingOptions
+    setPagingOptions(newPagingOptions)
     props.location.search = search_params
   }
 
@@ -88,7 +88,7 @@ export default props => {
       search: '?' + search_params.toString()
     })
     const newPagingOptions = { ...pagingOptions, 'orderBy': e.target.value }
-    pagingOptions = newPagingOptions
+    setPagingOptions(newPagingOptions)
     props.location.search = search_params
   }
 
@@ -112,6 +112,7 @@ export default props => {
       search: '?' + search_params.toString()
     })
     const newPagingOptions = { ...pagingOptions, 'pageNumber': Number(e.target.dataset.pagenumber) }
+    setPagingOptions(newPagingOptions)
   }
 
   return pug`
@@ -148,14 +149,17 @@ export default props => {
         PublicationTable(publications=publications)
 
         .pagination
-          a.pagination-link(data-pagenumber=previousPageNumber) &laquo;
+          a.pagination-link(data-pagenumber=previousPageNumber,
+            onClick=paginationClickHandler) &laquo;
           each page in [...Array(numberOfPages).keys()].map(p => p + 1)
             a.pagination-link(
               key="pagination-link-" + page,
               className=page == pagingOptions.pageNumber ? "active" : "",
-              data-pagenumber=page)= page
+              data-pagenumber=page,
+              onClick=paginationClickHandler)= page
 
-          a.pagination-link(data-pagenumber=nextPageNumber) &raquo;
+          a.pagination-link(data-pagenumber=nextPageNumber,
+            onClick=paginationClickHandler) &raquo;
 
           p
             | Afficher
