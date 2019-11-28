@@ -39,12 +39,14 @@ export default props => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    console.log('USE EFFECT CALLED')
+    setLoading(true)
     const fetchPublications = async () => {
       const options = {
         headers: { 'accept-language': 'fr' }
       }
 
-      const response = await fetch(`http://localhost:3000/api/publications?${props.location.search}`, options)
+      const response = await fetch(`http://localhost:3000/api/publications${props.location.search}`, options)
 
       const publications = await response.json()
 
@@ -73,6 +75,7 @@ export default props => {
       search: '?' + search_params.toString()
     })
     const newPagingOptions = { ...pagingOptions, 'sortBy': e.target.value }
+    props.location.search = search_params
   }
 
   // Fonction à exécuter si on change l'ordre de trie: order_by
