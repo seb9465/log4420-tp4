@@ -16,7 +16,7 @@ export default props => {
   // - (DONE) Une fois que les données ont été récupérées, le loading devient false
   // - (DONE) Migrez la table de publication dans la composante PublicationTable.
   // - (DONE) Faite correctement la gestion d'événement lorsqu'on change le type de trie, l'ordre de trie, le nombre d'éléments par page et la page en cours.
-  // - Si on clique sur "Ajouter une publication", affichez la composante 'PublicationCreationModal'
+  // - (DONE) Si on clique sur "Ajouter une publication", affichez la composante 'PublicationCreationModal'
   // - Si on clique sur le bouton X de la modal, elle doit se fermer.
   // - Supprimez une publication si on clique sur le bouton de suppression et rechargez la page.
   // - Gestion du formulaire de création d'une publication.
@@ -27,7 +27,7 @@ export default props => {
     publications: []
   })
 
-  const showModal = false
+  const [showModal, setShowModal] = useState(false)
 
   const [pagingOptions, setPagingOptions] = useState({
     'limit': 10,
@@ -114,6 +114,10 @@ export default props => {
     setPagingOptions(newPagingOptions)
   }
 
+  const addPubBtnHandler = e => {
+    setShowModal(true)
+  }
+
   return pug`
     .loading-container
       if loading
@@ -129,9 +133,10 @@ export default props => {
               each err, i in errors
                 li(key="error" + i)= err
 
-        button.trigger Ajouter une publication
+        button.trigger(onClick=addPubBtnHandler) Ajouter une publication
 
-        // PublicationCreationModal()
+        if showModal
+          PublicationCreationModal()
 
         p
           | Trié par: #{''}
