@@ -39,8 +39,6 @@ export default props => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    console.log('USE EFFECT CALLED')
-    setLoading(true)
     const fetchPublications = async () => {
       const options = {
         headers: { 'accept-language': 'fr' }
@@ -52,6 +50,8 @@ export default props => {
 
       return publications
     }
+
+    setLoading(true)
 
     fetchPublications().then(publications => {
       setPublications(publications)
@@ -75,6 +75,7 @@ export default props => {
       search: '?' + search_params.toString()
     })
     const newPagingOptions = { ...pagingOptions, 'sortBy': e.target.value }
+    pagingOptions = newPagingOptions
     props.location.search = search_params
   }
 
@@ -87,6 +88,8 @@ export default props => {
       search: '?' + search_params.toString()
     })
     const newPagingOptions = { ...pagingOptions, 'orderBy': e.target.value }
+    pagingOptions = newPagingOptions
+    props.location.search = search_params
   }
 
   const elementsPerPageHandler = e => {
