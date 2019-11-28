@@ -14,7 +14,7 @@ export default props => {
   // À COMPLÉTER
   // - (DONE) Récupérez des publications du service web http://localhost:3000/api/publications en utilisant les 'query parameters' de l'URL (avec props.location.search)
   // - (DONE) Une fois que les données ont été récupérées, le loading devient false
-  // - Migrez la table de publication dans la composante PublicationTable.
+  // - (DONE) Migrez la table de publication dans la composante PublicationTable.
   // - Faite correctement la gestion d'événement lorsqu'on change le type de trie, l'ordre de trie, le nombre d'éléments par page et la page en cours.
   // - Si on clique sur "Ajouter une publication", affichez la composante 'PublicationCreationModal'
   // - Si on clique sur le bouton X de la modal, elle doit se fermer.
@@ -139,30 +139,7 @@ export default props => {
             option(value="desc") décroissant
             option(value="asc") croissant
 
-        table.publications
-          tbody
-            each pub, i in publications.publications
-              tr(key=pub._id)
-                td
-                  .del-icon(data-id=pub._id) #[i.fa.fa-trash-o.fa-2x]
-
-                td
-                  span.annee= pub.year
-
-                  br
-
-                  if pub.month
-                    span.mois= pub.month
-
-                td.publication
-                  p.pubtitle= pub.title
-
-                  p.authors= pub.authors.join(', ')
-
-                  p.venuetype
-
-                  p.venue
-                    i= pub.venue
+        PublicationTable(publications=publications)
 
         .pagination
           a.pagination-link(data-pagenumber=previousPageNumber) &laquo;
