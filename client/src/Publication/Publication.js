@@ -76,7 +76,6 @@ export default props => {
     })
     const newPagingOptions = { ...pagingOptions, 'sortBy': e.target.value }
     setPagingOptions(newPagingOptions)
-    props.location.search = search_params
   }
 
   // Fonction à exécuter si on change l'ordre de trie: order_by
@@ -89,7 +88,6 @@ export default props => {
     })
     const newPagingOptions = { ...pagingOptions, 'orderBy': e.target.value }
     setPagingOptions(newPagingOptions)
-    props.location.search = search_params
   }
 
   const elementsPerPageHandler = e => {
@@ -100,7 +98,8 @@ export default props => {
       pathname: props.location.pathname,
       search: '?' + search_params.toString()
     })
-    const newPagingOption = { ...pagingOptions, 'limit': Number(e.target.value), 'pageNumber': 1 }
+    const newPagingOptions = { ...pagingOptions, 'limit': Number(e.target.value), 'pageNumber': 1 }
+    setPagingOptions(newPagingOptions)
   }
 
   const paginationClickHandler = e => {
@@ -163,7 +162,8 @@ export default props => {
 
           p
             | Afficher
-            select#elementsPerPageSection(defaultValue=pagingOptions.limit)
+            select#elementsPerPageSection(defaultValue=pagingOptions.limit,
+              onChange=elementsPerPageHandler)
               each value in [10, 20, 30, 50, 100]
                 option(key="option" + value, value=value)= value
 
