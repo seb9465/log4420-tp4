@@ -15,7 +15,7 @@ export default props => {
   // - (DONE) Récupérez des publications du service web http://localhost:3000/api/publications en utilisant les 'query parameters' de l'URL (avec props.location.search)
   // - (DONE) Une fois que les données ont été récupérées, le loading devient false
   // - (DONE) Migrez la table de publication dans la composante PublicationTable.
-  // - Faite correctement la gestion d'événement lorsqu'on change le type de trie, l'ordre de trie, le nombre d'éléments par page et la page en cours.
+  // - (DONE) Faite correctement la gestion d'événement lorsqu'on change le type de trie, l'ordre de trie, le nombre d'éléments par page et la page en cours.
   // - Si on clique sur "Ajouter une publication", affichez la composante 'PublicationCreationModal'
   // - Si on clique sur le bouton X de la modal, elle doit se fermer.
   // - Supprimez une publication si on clique sur le bouton de suppression et rechargez la page.
