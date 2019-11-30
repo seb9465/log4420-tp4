@@ -28,8 +28,11 @@ const directory = require('serve-index')
 
 const formatter = require('./helpers/formatter')
 
-const config = require('./config.json')
+// const config = require('./config.json')
 const MongoClient = require('mongodb').MongoClient
+const dotenv = require('dotenv')
+
+dotenv.config({ path: './../.env' })
 
 // Possibilité de spécifier le numéro de port par ligne de commande.
 const port = process.env.PORT || 3000
@@ -92,12 +95,12 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500)
   res.render('error')
 })
-
-MongoClient.connect(config.dbUrl, { useNewUrlParser: true }, (err, client) => {
+console.log(process.env.DB_URL)
+MongoClient.connect(process.env.DB_URL, { useNewUrlParser: true }, (err, client) => {
   if (err) {
     throw err
   }
-  app.db = client.db(config.dbName)
+  app.db = client.db(process.env.DB_NAME)
   app.listen(port, function () {
     console.log('Listening on port ' + port)
   })

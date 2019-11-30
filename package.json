@@ -20,5 +20,8 @@
     "nightwatch-custom-commands-assertions": "^1.1.0"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^8.2.0"
+  }
 }
