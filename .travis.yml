@@ -8,10 +8,10 @@ install:
 script:
   - cd ./client/ && npm run build
 
-# deploy:
-#   provider: heroku
-#   api_key: $HEROKU_API_KEY
-#   app: $HEROKU_APP_NAME
-#   on: 
-#     branch: master
+deploy:
+  provider: heroku
+  api_key: $HEROKU_API_KEY
+  app: $HEROKU_APP_NAME
+  on: 
+    branch: master
 
