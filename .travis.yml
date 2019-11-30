@@ -3,7 +3,6 @@ node_js:
   - "10"
 
 install:
-  - npm run preinstall
   - npm run postinstall
 
 script:
