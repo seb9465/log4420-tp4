@@ -16,10 +16,14 @@ export default props => {
 
   const formData = defaultFormData
 
+  const onCloseButtonClick = e => {
+    props.onCloseClick();
+  }
+
   return pug`
     .modal(className="show-modal")
       .modal-content
-        i.fa.fa-window-close.fa-2x.close-button
+        i.fa.fa-window-close.fa-2x.close-button(onClick=onCloseButtonClick)
 
         h2 Création d'une publication
 

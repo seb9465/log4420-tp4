@@ -118,6 +118,10 @@ export default props => {
     setShowModal(true)
   }
 
+  const closeModal = e => {
+    setShowModal(false)
+  }
+
   return pug`
     .loading-container
       if loading
@@ -136,7 +140,7 @@ export default props => {
         button.trigger(onClick=addPubBtnHandler) Ajouter une publication
 
         if showModal
-          PublicationCreationModal()
+          PublicationCreationModal(onCloseClick=closeModal)
 
         p
           | Trié par: #{''}
