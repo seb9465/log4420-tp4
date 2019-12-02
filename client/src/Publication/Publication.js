@@ -17,7 +17,7 @@ export default props => {
   // - (DONE) Migrez la table de publication dans la composante PublicationTable.
   // - (DONE) Faite correctement la gestion d'événement lorsqu'on change le type de trie, l'ordre de trie, le nombre d'éléments par page et la page en cours.
   // - (DONE) Si on clique sur "Ajouter une publication", affichez la composante 'PublicationCreationModal'
-  // - Si on clique sur le bouton X de la modal, elle doit se fermer.
+  // - (DONE) Si on clique sur le bouton X de la modal, elle doit se fermer.
   // - Supprimez une publication si on clique sur le bouton de suppression et rechargez la page.
   // - Gestion du formulaire de création d'une publication.
   //   Si le formulaire a été correctement rempli, affichez la nouvelle publication dans la table.
