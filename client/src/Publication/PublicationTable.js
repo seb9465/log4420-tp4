@@ -7,13 +7,18 @@ const pug = window.pug
 export default props => {
   const publications = props.publications;
 
+  const onDeletePubClick = e => {
+    const clickedElemId = e.target.parentElement.getAttribute('data-id')
+    props.onDeletePubClick(clickedElemId)
+  }
+
   return pug`
     table.publications
       tbody
         each pub, i in publications.publications
           tr(key=pub._id)
             td
-              .del-icon(data-id=pub._id) #[i.fa.fa-trash-o.fa-2x]
+              .del-icon(data-id=pub._id onClick=onDeletePubClick) #[i.fa.fa-trash-o.fa-2x]
 
             td
               span.annee= pub.year

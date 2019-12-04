@@ -18,7 +18,7 @@ export default props => {
   // - (DONE) Faite correctement la gestion d'événement lorsqu'on change le type de trie, l'ordre de trie, le nombre d'éléments par page et la page en cours.
   // - (DONE) Si on clique sur "Ajouter une publication", affichez la composante 'PublicationCreationModal'
   // - (DONE) Si on clique sur le bouton X de la modal, elle doit se fermer.
-  // - Supprimez une publication si on clique sur le bouton de suppression et rechargez la page.
+  // - (DONE) Supprimez une publication si on clique sur le bouton de suppression et rechargez la page.
   // - Gestion du formulaire de création d'une publication.
   //   Si le formulaire a été correctement rempli, affichez la nouvelle publication dans la table.
   //   Si le serveur renvoie une erreur, alors affichez les erreurs.
@@ -26,6 +26,8 @@ export default props => {
     count: 0,
     publications: []
   })
+
+  const [triggerRender, setTriggerRender] = useState(false);
 
   const [showModal, setShowModal] = useState(false)
 
@@ -57,7 +59,7 @@ export default props => {
       setPublications(publications)
       setLoading(false)
     })
-  }, [props.location.search])
+  }, [props.location.search, triggerRender])
 
   const errors = []
 
@@ -122,6 +124,22 @@ export default props => {
     setShowModal(false)
   }
 
+  const onDeletePubClick = elemId => {
+    const deletePublication = async () => {
+      const options = {
+        method: 'DELETE'
+      }
+
+      const response = await fetch(`http://localhost:3000/api/publications/${elemId}`, options)
+
+      return response
+    }
+
+    deletePublication().then(result => {
+      setTriggerRender(!triggerRender)
+    })
+  }
+
   return pug`
     .loading-container
       if loading
@@ -154,7 +172,7 @@ export default props => {
             option(value="desc") décroissant
             option(value="asc") croissant
 
-        PublicationTable(publications=publications)
+        PublicationTable(publications=publications onDeletePubClick=onDeletePubClick)
 
         .pagination
           a.pagination-link(data-pagenumber=previousPageNumber,
