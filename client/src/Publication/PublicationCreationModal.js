@@ -1,96 +1,135 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 const pug = window.pug
 const moment = window.moment
 
-export default props => {
-  const monthNames = moment.months()
+export default class PubForm extends React.Component {
+  constructor(props) {
+    super(props)
 
-  const defaultFormData = {
-    'year': '',
-    'month': '',
-    'title': '',
-    'authors': [''],
-    'venue': ''
+    this.monthNames = moment.months()
+
+    this.defaultFormData = {
+      'year': 2000,
+      'month': 0,
+      'title': 'allo',
+      'authors': [''],
+      'venue': ''
+    }
+
+    this.state = {
+      formData: this.defaultFormData
+    }
+
+    this.handleUserInput = this.handleUserInput.bind(this)
   }
 
-  const formData = defaultFormData
-
-  const onCloseButtonClick = e => {
-    props.onCloseClick();
+  onCloseButtonClick = e => {
+    this.props.onCloseClick();
   }
 
-  return pug`
-    .modal(className="show-modal")
-      .modal-content
-        i.fa.fa-window-close.fa-2x.close-button(onClick=onCloseButtonClick)
+  handleUserInput = e => {
+    const fieldName = e.target.name
+    const fieldValue = e.target.value
+    const n = this.state.formData;
+    switch (fieldName) {
+      case 'year':
+      case 'month':
+      case 'title':
+      case 'venue':
+        n[fieldName] = fieldValue;
+        this.setState({formData: n})
+        break;
+      case 'authors[]':
+        break;
+      default:
+        break;
+    }
+  }
 
-        h2 Création d'une publication
+  addAuthor = e => {
+    const n = this.state.formData;
+    n.authors.push(['']);
+    this.setState({formData: n});
+  }
 
-        form
-          label(for="year") Année:
+  render() {
+    return pug`
+      .modal(className="show-modal")
+        .modal-content
+          i.fa.fa-window-close.fa-2x.close-button(onClick=this.onCloseButtonClick)
 
-          input(
-            type="number",
-            name="year",
-            min="1900",
-            max="2099",
-            step="1",
-            value=formData.year,
-            placeholder="Année")
+          h2 Création d'une publication
 
-          br
+          form
+            label(for="year") Année:
 
-          label(for="month") Mois #{' '}
+            input(
+              type="number",
+              name="year",
+              min="1900",
+              max="2099",
+              step="1",
+              value=this.state.formData.year,
+              placeholder="Année",
+              onChange=this.handleUserInput)
 
-          select(name="month", value=formData.month)
-            option(value="")
-              | - #{' '} Mois - #{' '}
+            br
 
-            each monthName, i in monthNames
-              option(key=monthName, value=i)= monthName.charAt(0).toUpperCase() + monthName.slice(1)
+            label(for="month") Mois #{' '}
 
-          br
+            select(name="month", value=this.state.formData.month, onChange=this.handleUserInput)
+              option(value="")
+                | - #{' '} Mois - #{' '}
 
-          label(for="title") Titre #{':'}
+              each monthName, i in this.monthNames
+                option(key=monthName, value=i)= monthName.charAt(0).toUpperCase() + monthName.slice(1)
 
-          input(type="text",
-            name="title",
-            placeholder="Titre",
-            value=formData.title)
+            br
 
-          br
+            label(for="title") Titre #{':'}
 
-          label(for="authors") Auteur #{':'}
+            input(type="text",
+              name="title",
+              placeholder="Titre",
+              value=this.state.formData.title,
+              onChange=this.handleUserInput)
 
-          br
+            br
 
-          each author, i in formData.authors
-            .author-input(key="div" + author)
-              input(
-                type="text",
-                name="authors[]"
-                placeholder="Auteur",
-                value=author)
+            label(for="authors") Auteur #{':'}
 
-            if i > 0
-              .remove-author
-                i.fa.fa-minus.fa-3x
+            br
 
-          .add-author
-            i.fa.fa-plus.fa-3x
+            each author, i in this.state.formData.authors
+              .author-input(key="div" + author)
+                input(
+                  type="text",
+                  name="authors[]"
+                  placeholder="Auteur",
+                  value=author,
+                  onChange=this.handleUserInput)
 
-          label(for="venue") Revue #{''}
+              if i > 0
+                .remove-author
+                  i.fa.fa-minus.fa-3x
 
-          input(
-            type="text",
-            name="venue",
-            placeholder="Revue",
-            value=formData.venue)
+            .add-author(onClick=this.addAuthor)
+              i.fa.fa-plus.fa-3x
 
-          br
+            label(for="venue") Revue #{''}
 
-          input(type="submit", value="Création d'une publication")
-  `
+            input(
+              type="text",
+              name="venue",
+              placeholder="Revue",
+              value=this.state.formData.venue,
+              onChange=this.handleUserInput)
+
+            br
+
+            input(type="submit", value="Création d'une publication")
+    `
+  }
 }
 

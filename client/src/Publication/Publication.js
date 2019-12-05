@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import './Publication.css'
 
 import PublicationTable from './PublicationTable'
-import PublicationCreationModal from './PublicationCreationModal'
+import PubForm from './PublicationCreationModal'
 import Loader from '../Loader/Loader'
 
 const pug = window.pug
@@ -158,7 +158,7 @@ export default props => {
         button.trigger(onClick=addPubBtnHandler) Ajouter une publication
 
         if showModal
-          PublicationCreationModal(onCloseClick=closeModal)
+          PubForm(onCloseClick=closeModal)
 
         p
           | Trié par: #{''}
