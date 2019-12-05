@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
+import randomKey from './utils.js'
 
 const pug = window.pug
 const moment = window.moment
@@ -8,20 +9,19 @@ export default class PubForm extends React.Component {
     super(props)
 
     this.monthNames = moment.months()
-
     this.defaultFormData = {
-      'year': 2000,
-      'month': 0,
-      'title': 'allo',
-      'authors': [''],
+      'year': '',
+      'month': '',
+      'title': '',
+      'authors': { [randomKey()] : '' },
       'venue': ''
     }
+    this.handleUserInput = this.handleUserInput.bind(this)
+    this.handleAuthorInput = this.handleAuthorInput.bind(this)
 
     this.state = {
       formData: this.defaultFormData
     }
-
-    this.handleUserInput = this.handleUserInput.bind(this)
   }
 
   onCloseButtonClick = e => {
@@ -31,26 +31,15 @@ export default class PubForm extends React.Component {
   handleUserInput = e => {
     const fieldName = e.target.name
     const fieldValue = e.target.value
-    const n = this.state.formData;
-    switch (fieldName) {
-      case 'year':
-      case 'month':
-      case 'title':
-      case 'venue':
-        n[fieldName] = fieldValue;
-        this.setState({formData: n})
-        break;
-      case 'authors[]':
-        break;
-      default:
-        break;
-    }
+    this.setState({ formData: {...this.state.formData, [fieldName]: fieldValue} })
+  }
+
+  handleAuthorInput = (e, key) => {
+    this.setState({ formData: {...this.state.formData, authors: { ...this.state.formData.authors, [key]: e.target.value }}})
   }
 
   addAuthor = e => {
-    const n = this.state.formData;
-    n.authors.push(['']);
-    this.setState({formData: n});
+    this.setState({formData: { ...this.state.formData, authors: { ...this.state.formData.authors, [randomKey()]: '' }}});
   }
 
   render() {
@@ -101,14 +90,17 @@ export default class PubForm extends React.Component {
 
             br
 
-            each author, i in this.state.formData.authors
-              .author-input(key="div" + author)
+            each author, i in Object.entries(this.state.formData.authors)
+              -
+                console.log(author)
+
+              .author-input(key="div" + author[0])
                 input(
                   type="text",
                   name="authors[]"
                   placeholder="Auteur",
-                  value=author,
-                  onChange=this.handleUserInput)
+                  value=author[1],
+                  onChange=(e) => this.handleAuthorInput(e, author[0]))
 
               if i > 0
                 .remove-author
