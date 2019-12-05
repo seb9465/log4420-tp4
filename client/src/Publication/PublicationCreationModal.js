@@ -39,7 +39,16 @@ export default class PubForm extends React.Component {
   }
 
   addAuthor = e => {
-    this.setState({formData: { ...this.state.formData, authors: { ...this.state.formData.authors, [randomKey()]: '' }}});
+    this.setState({formData: { ...this.state.formData, authors: { ...this.state.formData.authors, [randomKey()]: '' }}})
+  }
+
+  removeAuthor = (e, key) => {
+    this.setState({
+      formData: { 
+        ...this.state.formData, 
+        authors: Object.fromEntries(Object.entries(this.state.formData.authors).filter(auth => auth[0] !== key))
+      }
+    })
   }
 
   render() {
@@ -93,7 +102,7 @@ export default class PubForm extends React.Component {
             each author, i in Object.entries(this.state.formData.authors)
               -
                 console.log(author)
-
+                
               .author-input(key="div" + author[0])
                 input(
                   type="text",
@@ -103,7 +112,7 @@ export default class PubForm extends React.Component {
                   onChange=(e) => this.handleAuthorInput(e, author[0]))
 
               if i > 0
-                .remove-author
+                .remove-author(onClick=(e) => this.removeAuthor(e, author[0]))
                   i.fa.fa-minus.fa-3x
 
             .add-author(onClick=this.addAuthor)
