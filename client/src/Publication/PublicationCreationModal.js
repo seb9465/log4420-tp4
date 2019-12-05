@@ -18,6 +18,7 @@ export default class PubForm extends React.Component {
     }
     this.handleUserInput = this.handleUserInput.bind(this)
     this.handleAuthorInput = this.handleAuthorInput.bind(this)
+    this.submitForm = this.submitForm.bind(this)
 
     this.state = {
       formData: this.defaultFormData
@@ -52,6 +53,8 @@ export default class PubForm extends React.Component {
   }
 
   submitForm = e => {
+    e.preventDefault();
+    this.props.onSubmitNewPub({ ...this.state.formData, authors: Object.values(this.state.formData.authors) })
     this.props.onCloseClick();
   }
 
@@ -63,7 +66,7 @@ export default class PubForm extends React.Component {
 
           h2 Création d'une publication
 
-          form
+          form(onSubmit=this.submitForm)
             label(for="year") Année:
 
             input(
@@ -130,7 +133,7 @@ export default class PubForm extends React.Component {
 
             br
 
-            input(type="submit", value="Création d'une publication", onClick=this.submitForm)
+            input(type="submit", value="Création d'une publication")
     `
   }
 }

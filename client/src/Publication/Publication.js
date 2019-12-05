@@ -140,6 +140,26 @@ export default props => {
     })
   }
 
+  const onSubmitNewPub = formData => {
+    const createPublication = async () => {
+      const options = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json'},
+        body: JSON.stringify(formData)
+      }
+      console.log(options)
+      const response = await fetch('http://localhost:3000/api/publications', options)
+
+      const pub = await response.json()
+
+      return pub
+    }
+
+    createPublication().then(res => {
+      setTriggerRender(!triggerRender)
+    })
+  }
+
   return pug`
     .loading-container
       if loading
@@ -158,7 +178,7 @@ export default props => {
         button.trigger(onClick=addPubBtnHandler) Ajouter une publication
 
         if showModal
-          PubForm(onCloseClick=closeModal)
+          PubForm(onCloseClick=closeModal, onSubmitNewPub=onSubmitNewPub)
 
         p
           | Trié par: #{''}
