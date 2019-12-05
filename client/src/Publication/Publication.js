@@ -19,7 +19,7 @@ export default props => {
   // - (DONE) Si on clique sur "Ajouter une publication", affichez la composante 'PublicationCreationModal'
   // - (DONE) Si on clique sur le bouton X de la modal, elle doit se fermer.
   // - (DONE) Supprimez une publication si on clique sur le bouton de suppression et rechargez la page.
-  // - Gestion du formulaire de création d'une publication.
+  // - (DONE) Gestion du formulaire de création d'une publication.
   //   Si le formulaire a été correctement rempli, affichez la nouvelle publication dans la table.
   //   Si le serveur renvoie une erreur, alors affichez les erreurs.
   const [publications, setPublications] = useState({

@@ -51,6 +51,10 @@ export default class PubForm extends React.Component {
     })
   }
 
+  submitForm = e => {
+    this.props.onCloseClick();
+  }
+
   render() {
     return pug`
       .modal(className="show-modal")
@@ -100,9 +104,6 @@ export default class PubForm extends React.Component {
             br
 
             each author, i in Object.entries(this.state.formData.authors)
-              -
-                console.log(author)
-                
               .author-input(key="div" + author[0])
                 input(
                   type="text",
@@ -129,7 +130,7 @@ export default class PubForm extends React.Component {
 
             br
 
-            input(type="submit", value="Création d'une publication")
+            input(type="submit", value="Création d'une publication", onClick=this.submitForm)
     `
   }
 }
