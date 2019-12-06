@@ -60,7 +60,7 @@ export default class PubForm extends React.Component {
 
   render() {
     return pug`
-      .modal(className="show-modal")
+      .modal(className=this.props.showModal ? "show-modal" : "")
         .modal-content
           i.fa.fa-window-close.fa-2x.close-button(onClick=this.onCloseButtonClick)
 

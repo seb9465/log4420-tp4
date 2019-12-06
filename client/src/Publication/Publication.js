@@ -177,8 +177,7 @@ export default props => {
 
         button.trigger(onClick=addPubBtnHandler) Ajouter une publication
 
-        if showModal
-          PubForm(onCloseClick=closeModal, onSubmitNewPub=onSubmitNewPub)
+        PubForm(onCloseClick=closeModal, onSubmitNewPub=onSubmitNewPub, showModal=showModal)
 
         p
           | Trié par: #{''}
