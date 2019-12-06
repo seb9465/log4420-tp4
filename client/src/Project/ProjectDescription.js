@@ -7,7 +7,7 @@ const ProjectDescription = props => {
   const project = props.project
 
   return pug`
-    li
+    li(key=project._id)
       span
         = project.student
         | #{', '}
