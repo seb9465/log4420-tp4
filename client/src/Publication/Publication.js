@@ -61,7 +61,7 @@ export default props => {
     })
   }, [props.location.search, triggerRender])
 
-  const errors = []
+  const [errors, setErrors] = useState([])
 
   const numberOfPages = Math.ceil(publications.count / pagingOptions.limit)
 
@@ -147,7 +147,7 @@ export default props => {
         headers: { 'Content-Type': 'application/json'},
         body: JSON.stringify(formData)
       }
-      console.log(options)
+
       const response = await fetch('http://localhost:3000/api/publications', options)
 
       const pub = await response.json()
@@ -156,6 +156,12 @@ export default props => {
     }
 
     createPublication().then(res => {
+      if (res.errors) {
+        setErrors(res.errors)
+      } else if(errors.length > 0) {
+        setErrors([])
+      }
+
       setTriggerRender(!triggerRender)
     })
   }
