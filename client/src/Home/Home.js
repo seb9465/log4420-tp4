@@ -10,8 +10,8 @@ const fetch = window.fetch
 
 export default () => {
   // À COMPLÉTER
-  // 1- Récupérer les nouvelles du service web http://localhost:3000/api/feed avec 'fetch' et avec l'entête 'accept-language' à 'fr'.
-  // 2- Une fois que les données ont été récupérées, le loading devient false
+  // 1- (DONE) Récupérer les nouvelles du service web http://localhost:3000/api/feed avec 'fetch' et avec l'entête 'accept-language' à 'fr'.
+  // 2- (DONE) Une fois que les données ont été récupérées, le loading devient false
   const [feeds, setFeeds] = useState([])
   const [loading, setLoading] = useState(true)
 
