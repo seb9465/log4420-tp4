@@ -15,7 +15,7 @@ export default props => {
   return pug`
     table.publications
       tbody
-        each pub, i in publications.publications
+        each pub, i in publications
           tr(key=pub._id)
             td
               .del-icon(data-id=pub._id onClick=onDeletePubClick) #[i.fa.fa-trash-o.fa-2x]
@@ -37,5 +37,5 @@ export default props => {
 
               p.venue
                 i= pub.venue
-                `
+    `
 }

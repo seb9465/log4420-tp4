@@ -191,7 +191,7 @@ export default props => {
             option(value="desc") décroissant
             option(value="asc") croissant
 
-        PublicationTable(publications=publications onDeletePubClick=onDeletePubClick)
+        PublicationTable(publications=publications.publications, onDeletePubClick=onDeletePubClick)
 
         .pagination
           a.pagination-link(data-pagenumber=previousPageNumber,

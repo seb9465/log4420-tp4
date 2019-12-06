@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
 import Loader from '../Loader/Loader'
+import PublicationTable from './../Publication/PublicationTable'
 
 import './Project.css'
 
@@ -19,7 +20,24 @@ export default props => {
   const [project, setProject] = useState({})
   const [publications, setPublications] = useState([])
   const [loading, setLoading] = useState(true)
+  const [triggerRender, setTriggerRender] = useState(false)
 
+  const onDeletePubClick = elemId => {
+
+    const deletePublication = async () => {
+      const options = {
+        method: 'DELETE'
+      }
+
+      const response = await fetch(`http://localhost:3000/api/publications/${elemId}`, options)
+
+      return response
+    }
+
+    deletePublication().then(result => {
+      setTriggerRender(!triggerRender)
+    })
+  }
 
   useEffect(() => {
     const fetchProject = async () => {
@@ -39,7 +57,7 @@ export default props => {
       setPublications(projectObj.publications)
       setLoading(false)
     })
-  }, [props.match.params.id])
+  }, [props.match.params.id, triggerRender])
 
   return pug`
     .loading-container
@@ -76,6 +94,6 @@ export default props => {
 
           if publications.length > 0
             h2 Publications
-            // Utilisez la composante PublicationTable
+            PublicationTable(onDeletePubClick=onDeletePubClick, publications=publications)
   `
 }

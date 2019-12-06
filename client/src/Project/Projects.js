@@ -57,7 +57,7 @@ export default () => {
         else
           ul.projects
             each project in currentProjects
-              ProjectDescription(project=project)
+              ProjectDescription(project=project, key=project._id)
 
         h1 Projets passés
 
@@ -67,6 +67,6 @@ export default () => {
         else
           ul.projects
             each project in pastProjects
-              ProjectDescription(project=project)
+              ProjectDescription(project=project, key=project._id)
   `
 }
